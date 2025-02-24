@@ -1,0 +1,21 @@
+// sample code for java that includes C# code
+
+import net.sf.jni4net.*;
+import java.io.IOException;
+import java.lang.String;
+import system.*;
+
+
+public class Main
+{
+    public static void main(String[] args) throws IOException
+    {
+        
+        Bridge.setVerbose(true);
+
+        Bridge.init();
+
+        // C# code
+        Console.WriteLine("Hello .NET world!\n\n");
+    }
+}
