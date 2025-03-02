@@ -7,7 +7,7 @@ public class Dice {
     }
 
     //Returns a random number from 1 to 6
-    public int score(){
+    public int trowDice(){
         Random rnd = new Random();
         return rnd.nextInt(0, 6) + 1;
     }

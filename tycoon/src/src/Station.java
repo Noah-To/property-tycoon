@@ -7,24 +7,33 @@ public class Station extends Street {
     int cost = 200;
     int rent = 0;
     int position;
-    String owner = "";
+    Player owner = null;
 
     public Station(int position) {
         this.position = position;
     }
 
-    public void bought(String owner){
+    public void bought(Player owner){
         this.owner = owner;
         level++;
     }
 
-    public String getOwner(){
+    public Player getOwner(){
         return this.owner;
     }
 
+    @Override
+    public String getColor() {
+        return "Station";
+    }
+
     public void sold(){
-        this.owner = "";
+        this.owner = null;
         this.level = 0;
+    }
+
+    public int getRent(){
+        return this.rent;
     }
 
     public void incLevel(){

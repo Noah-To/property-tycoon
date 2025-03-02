@@ -10,7 +10,7 @@ public class Brown extends Street{
     int houses = 0;
     int house_cost = 50;
     String color = "brown";
-    String owner = "";
+    Player owner = null;
 
     public Brown(int cost, int position, int rent){
         this.cost = cost;
@@ -18,7 +18,7 @@ public class Brown extends Street{
         this.rent = rent;
     }
 
-    public String getOwner(){
+    public Player getOwner(){
         return this.owner;
     }
 
@@ -26,13 +26,13 @@ public class Brown extends Street{
         return this.color;
     }
 
-    public void bought(String owner){
+    public void bought(Player owner){
         this.owner = owner;
         level++;
     }
 
     public void sold(){
-        this.owner = "";
+        this.owner = null;
         this.level = 0;
     }
 
@@ -52,6 +52,10 @@ public class Brown extends Street{
     public void sellHouse(){
         houses--;
         this.costOfRent();
+    }
+
+    public int getRent(){
+        return this.rent;
     }
 
     public void costOfRent(){

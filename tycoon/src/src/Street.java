@@ -5,6 +5,7 @@ public class Street {
 
     String color;               //Attribute color
     int position;               //Attribute position
+    String owner;
 
     public Street(){
         this.color = "";
@@ -38,4 +39,8 @@ public class Street {
 
     //Calculating cost of rent
     public void costOfRent(){}
+
+    public Player getOwner(){ return null;}
+
+    public int getRent(){return 0;};
 }

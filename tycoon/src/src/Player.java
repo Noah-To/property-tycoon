@@ -8,6 +8,7 @@ public class Player {
     int imprisoned = 0;
     int move_order;
     String name;
+    Boolean alive = true;
 
     public Player(int move_order, String name){
         this.move_order = move_order;
@@ -74,5 +75,9 @@ public class Player {
     //Getting info about is player in jail or not
     public int inPrison(){
         return this.imprisoned;
+    }
+
+    public int getPosition(){
+        return this.position;
     }
 }

@@ -7,24 +7,29 @@ public class Utility extends Street {
     int cost = 200;
     int rent = 0;
     int position;
-    String owner = "";
+    Player owner = null;
 
     public Utility(int position) {
         this.position = position;
     }
 
-    public void bought(String owner){
+    public void bought(Player owner){
         this.owner = owner;
         level++;
     }
 
-    public String getOwner(){
+    public Player getOwner(){
         return this.owner;
     }
 
     public void sold(){
-        this.owner = "";
+        this.owner = null;
         this.level = 0;
+    }
+
+    @Override
+    public String getColor() {
+        return "Utility";
     }
 
     public void incLevel(){
@@ -33,6 +38,10 @@ public class Utility extends Street {
 
     public void decLevel(){
         level--;
+    }
+
+    public int getRent(){
+        return this.rent;
     }
 
     public void costOfRent(int dice){
