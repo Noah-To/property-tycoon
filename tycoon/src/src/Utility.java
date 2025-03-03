@@ -8,6 +8,7 @@ public class Utility extends Street {
     int rent = 0;
     int position;
     Player owner = null;
+    String color = "utility";
 
     public Utility(int position) {
         this.position = position;
@@ -43,6 +44,8 @@ public class Utility extends Street {
     public int getRent(){
         return this.rent;
     }
+
+    public int getCost(){return this.cost;}
 
     public void costOfRent(int dice){
         if (level == 1){

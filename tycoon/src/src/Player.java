@@ -9,6 +9,7 @@ public class Player {
     int move_order;
     String name;
     Boolean alive = true;
+    int loop = 0;
 
     public Player(int move_order, String name){
         this.move_order = move_order;
@@ -16,13 +17,14 @@ public class Player {
     }
 
     //Method fpr position changing
-    public int move(int dices){
+    public void move(int dices){
         if (this.position + dices > 40){
             this.position = this.position + dices - 40;
+            loop++;
         } else {
             this.position += dices;
         }
-        return this.position;
+        //return this.position;
     }
 
     //Paying rent for bank or player
@@ -37,19 +39,13 @@ public class Player {
     }
 
     //Buying street
-    public String buyStreet(int cost){
+    public void pay(int cost){
         this.money -= cost;
-        return this.name;
     }
 
     //Selling Street
     public void sellStreet(int cost){
         this.money += cost;
-    }
-
-    //Buying house
-    public void buyHouse(int cost){
-        this.money -= cost;
     }
 
     //Selling House
@@ -60,6 +56,7 @@ public class Player {
     //Going to jail (Via card or field 31)
     public void beImprisoned(){
         this.imprisoned = 3;
+        this.position = 11;
     }
 
     //When you unsuccessful of getting out from the jail
@@ -80,4 +77,6 @@ public class Player {
     public int getPosition(){
         return this.position;
     }
+
+    public int getMoney(){return this.money;}
 }

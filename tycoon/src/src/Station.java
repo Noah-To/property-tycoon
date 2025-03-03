@@ -8,6 +8,7 @@ public class Station extends Street {
     int rent = 0;
     int position;
     Player owner = null;
+    String color = "station";
 
     public Station(int position) {
         this.position = position;
@@ -47,4 +48,6 @@ public class Station extends Street {
     public void costOfRent(){
         this.rent = 25 * (2^(level-1));
     }
+
+    public int getCost(){return this.cost;}
 }

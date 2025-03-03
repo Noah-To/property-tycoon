@@ -9,7 +9,7 @@ public class Blue extends Street{
     int level = 0;
     int houses = 0;
     int house_cost = 50;
-    String color = "brown";
+    String color = "blue";
     Player owner = null;
 
     public Blue(int cost, int position, int rent){
@@ -44,6 +44,8 @@ public class Blue extends Street{
         level--;
     }
 
+    public int getCost(){return this.cost;}
+
     public void buildHouse(){
         houses++;
         this.costOfRent();
@@ -65,7 +67,7 @@ public class Blue extends Street{
         switch(h){
 
             case 0:
-                if (this.position == 10){
+                if (this.position ==10){
                     this.rent = 8;
                 }
                 else{

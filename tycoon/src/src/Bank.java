@@ -4,7 +4,7 @@ package src;
 public class Bank {
 
     int amount = 50000;                 //declaring amount
-    public Bank(){}
+    int taxes = 0;
 
     //Method for receiving money from player for operation
     public void getMoney(int money){
@@ -17,5 +17,19 @@ public class Bank {
             amount -= money;
         }
     }
+
+    public void recieveMoney(int money){
+        this.amount += money;
+    }
+
+    public void recieveTaxes(int taxes){
+        this.taxes += taxes;
+    }
+
+    public int returnTaxes(){
+        return this.taxes;
+    }
+
+    public void zeroTaxes(){ this.taxes = 0;}
 
 }

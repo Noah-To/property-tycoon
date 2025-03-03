@@ -9,7 +9,7 @@ public class Red extends Street{
     int level = 0;
     int houses = 0;
     int house_cost = 150;
-    String color = "brown";
+    String color = "red";
     Player owner = null;
 
     public Red(int cost, int position, int rent){
@@ -57,6 +57,8 @@ public class Red extends Street{
     public int getRent(){
         return this.rent;
     }
+
+    public int getCost(){return this.cost;}
 
     public void costOfRent(){
 

@@ -54,6 +54,8 @@ public class Brown extends Street{
         this.costOfRent();
     }
 
+    public int getCost(){return this.cost;}
+
     public int getRent(){
         return this.rent;
     }

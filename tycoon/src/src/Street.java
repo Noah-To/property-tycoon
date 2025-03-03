@@ -20,7 +20,7 @@ public class Street {
     public String getColor(){ return "";}
 
     //Method of getting an owner
-    public void bought(){}
+    public void bought(Player player){}
 
     //Method of losing and owner
     public void sold(){}
@@ -43,4 +43,6 @@ public class Street {
     public Player getOwner(){ return null;}
 
     public int getRent(){return 0;};
+
+    public int getCost(){return 0;}
 }

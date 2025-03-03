@@ -13,6 +13,11 @@ import src.Utility;
 import src.Tax;
 import src.SpecialStreet;
 
+
+import src.Street;
+import src.Player;
+
+
 import java.io.StringReader;
 //Board with all of the info
 public class Map {
@@ -90,6 +95,171 @@ public class Map {
     //Method that returns object (Strret) when its needed
     public Street giveStreet(int position){
         return map[position];
+    }
+
+    public void levelling(Street street){
+        String color = street.getColor();
+        int levels = 0;
+
+        switch (color){
+
+            case "brown":
+                if (street.getOwner() == map[1].getOwner() && street != map[1]){
+                    levels++;
+                    map[1].incLevel();
+                } else if (street.getOwner() == map[3].getOwner() && street != map[3]) {
+                    levels++;
+                    map[3].incLevel();
+                }
+                break;
+
+            case "blue":
+                if (street.getOwner() == map[6].getOwner() && street != map[6]){
+                    levels++;
+                    map[6].incLevel();
+                } else if (street.getOwner() == map[8].getOwner() && street != map[8]) {
+                    levels++;
+                    map[8].incLevel();
+                } else if (street.getOwner() == map[9].getOwner() && street != map[9]) {
+                    levels++;
+                    map[9].incLevel();
+                }
+                break;
+
+            case "purple":
+                if (street.getOwner() == map[11].getOwner() && street != map[11]){
+                    levels++;
+                    map[11].incLevel();
+                } else if (street.getOwner() == map[13].getOwner() && street != map[13]) {
+                    levels++;
+                    map[13].incLevel();
+                } else if (street.getOwner() == map[13].getOwner() && street != map[13]) {
+                    levels++;
+                    map[14].incLevel();
+                }
+                break;
+
+            case "orange":
+                if (street.getOwner() == map[16].getOwner() && street != map[16]){
+                    levels++;
+                    map[16].incLevel();
+                } else if (street.getOwner() == map[18].getOwner() && street != map[18]) {
+                    levels++;
+                    map[18].incLevel();
+                } else if (street.getOwner() == map[19].getOwner() && street != map[19]) {
+                    levels++;
+                    map[19].incLevel();
+                }
+                break;
+
+            case "red":
+                if (street.getOwner() == map[21].getOwner() && street != map[21]){
+                    levels++;
+                    map[21].incLevel();
+                } else if (street.getOwner() == map[23].getOwner() && street != map[23]) {
+                    levels++;
+                    map[23].incLevel();
+                } else if (street.getOwner() == map[24].getOwner() && street != map[24]) {
+                    levels++;
+                    map[24].incLevel();
+                }
+                break;
+
+            case "yellow":
+                if (street.getOwner() == map[26].getOwner() && street != map[26]){
+                    levels++;
+                    map[26].incLevel();
+                } else if (street.getOwner() == map[27].getOwner() && street != map[27]) {
+                    levels++;
+                    map[27].incLevel();
+                } else if (street.getOwner() == map[29].getOwner() && street != map[29]) {
+                    levels++;
+                    map[29].incLevel();
+                }
+                break;
+
+            case "green":
+                if (street.getOwner() == map[31].getOwner() && street != map[31]){
+                    levels++;
+                    map[31].incLevel();
+                } else if (street.getOwner() == map[32].getOwner() && street != map[32]) {
+                    levels++;
+                    map[32].incLevel();
+                } else if (street.getOwner() == map[34].getOwner() && street != map[34]) {
+                    levels++;
+                    map[34].incLevel();
+                }
+                break;
+
+            case "deep blue":
+                if (street.getOwner() == map[37].getOwner() && street != map[37]){
+                    levels++;
+                    map[37].incLevel();
+                } else if (street.getOwner() == map[39].getOwner() && street != map[39]) {
+                    levels++;
+                    map[39].incLevel();
+                }
+                break;
+
+            case "station":
+                if (street.getOwner() == map[6].getOwner() && street != map[6]){
+                    levels++;
+                    map[6].incLevel();
+                } else if (street.getOwner() == map[16].getOwner() && street != map[16]) {
+                    levels++;
+                    map[16].incLevel();
+                } else if (street.getOwner() == map[26].getOwner() && street != map[26]){
+                    levels++;
+                    map[26].incLevel();
+                } else if (street.getOwner() == map[36].getOwner() && street != map[36]) {
+                    levels++;
+                    map[36].incLevel();
+                }
+                break;
+
+            case "utility":
+                if (street.getOwner() == map[13].getOwner() && street != map[13]){
+                    levels++;
+                    map[13].incLevel();
+                } else if (street.getOwner() == map[29].getOwner() && street != map[29]) {
+                    levels++;
+                    map[29].incLevel();
+                }
+                break;
+        }
+
+        for (int i=0; i <levels; i++){
+            street.incLevel();
+        }
+    }
+
+    public int nextTurn(int nowTurn){
+        int turn = nowTurn;
+        turn++;
+        if (turn == 4){
+            turn = 0;
+        }
+        return turn;
+    }
+
+    public boolean looping(int turn, boolean loop1, Player[] players){
+        int i;
+        boolean loop = loop1;
+
+        if (turn == 3 && !loop){
+            if (players[turn].loop != 0){
+                for (i=0; i < 3; i++){
+                    if (players[i].loop == 0){
+                        break;
+                    }
+                }
+                if (i == 3){
+                    loop = true;
+                }
+            }
+        }
+
+        return loop;
     }
 
 }
