@@ -1,9 +1,9 @@
 package src;
-import com.sun.source.tree.WhileLoopTree;
 import src.Map;
 import src.Dice;
 import src.Player;
 import src.Street;
+import src.CardDeck;
 
 
 import java.util.Objects;
@@ -15,6 +15,9 @@ public class Main {
         Scanner inp = new Scanner(System.in);
         Dice d1 = new Dice();
         Dice d2 = new Dice();
+
+        CardDeck Opportunity_knoks = new CardDeck(16);
+        CardDeck Pot_luck = new CardDeck(17);
 
         int id1;        //Integer value of Dice 1
         int id2;        //Integer value of Dice 2
@@ -50,6 +53,42 @@ public class Main {
             id1 = d1.trowDice();
             id2 = d2.trowDice();
 
+            if (id1==id2){
+
+                repeat++;
+
+                if (repeat == 3){
+
+                    if (players[turn].inPrison() == -1){
+                        players[turn].beImprisoned();
+                        players[turn].free();
+
+                        if (Pot_luck.lastCard() == null){
+                            Pot_luck.returnCard("id16");
+                        } else {
+                            Opportunity_knoks.returnCard("id17");
+                        }
+
+                    } else if (players[turn].inPrison() == -2) {
+                        players[turn].beImprisoned();
+                        players[turn].free();
+                        players[turn].turnSkip();
+
+                        if (Pot_luck.lastCard() == null){
+                            Pot_luck.returnCard("id16");
+                        } else {
+                            Opportunity_knoks.returnCard("id17");
+                        }
+
+                    } else {
+                        players[turn].beImprisoned();
+                    }
+
+                    repeat = 0;
+                    continue;
+                }
+
+            }
 
             if (players[turn].imprisoned > 0){
                 if (id1 == id2){
@@ -69,6 +108,8 @@ public class Main {
                 }
             }
 
+
+            
             players[turn].move(id1 + id2);
             street = map.giveStreet(players[turn].getPosition()-1);
 
@@ -80,7 +121,12 @@ public class Main {
                         break;
 
                     case 2:
-                        //take card
+                        Pot_luck.takeCard();
+                        //Do some stuff                     TO BE DISCUSSED
+                        if (Pot_luck.takeCard() == "id16"){
+                            players[turn].turnSkip();
+                        }
+                        Pot_luck.nextCard("id16");
 
                     case 4:
                         players[turn].pay(200);
@@ -88,13 +134,23 @@ public class Main {
                         break;
 
                     case 7:
-                        //take card
+                        Opportunity_knoks.takeCard();
+                        //Do some stuff                             TO BE DISCUSSED
+                        if (Opportunity_knoks.takeCard() == "id17"){
+                            players[turn].turnSkip();
+                        }
+                        Opportunity_knoks.nextCard("id17");
 
                     case 10:
                         break;
 
                     case 17:
-                        //take card
+                        Pot_luck.takeCard();
+                        //Do some stuff                     TO BE DISCUSSED
+                        if (Pot_luck.takeCard() == "id16"){
+                            players[turn].turnSkip();
+                        }
+                        Pot_luck.nextCard("id16");
 
                     case 20:
                         players[turn].getRent(bank.returnTaxes());
@@ -102,17 +158,32 @@ public class Main {
                         break;
 
                     case 22:
-                        //take card
+                        Opportunity_knoks.takeCard();
+                        //Do some stuff                             TO BE DISCUSSED
+                        if (Opportunity_knoks.takeCard() == "id17"){
+                            players[turn].turnSkip();
+                        }
+                        Opportunity_knoks.nextCard("id17");
 
                     case 30:
                         players[turn].beImprisoned();
                         break;
 
                     case 33:
-                        //take card
+                        Pot_luck.takeCard();
+                        //Do some stuff                     TO BE DISCUSSED
+                        if (Pot_luck.takeCard() == "id16"){
+                            players[turn].turnSkip();
+                        }
+                        Pot_luck.nextCard("id16");
 
                     case 36:
-                        //take card
+                        Opportunity_knoks.takeCard();
+                        //Do some stuff                             TO BE DISCUSSED
+                        if (Opportunity_knoks.takeCard() == "id17"){
+                            players[turn].turnSkip();
+                        }
+                        Opportunity_knoks.nextCard("id17");
 
                     case 38:
                         players[turn].pay(100);
@@ -124,12 +195,12 @@ public class Main {
             } else {
 
                 own = street.getOwner();
-                if (own != null){
+                if (own != null && street.getOwner().inPrison() <= 0){
                     players[turn].payRent(street.getRent(), own);
                     /**
                      * If not enough money to pay rent players MUST themselves decide
-                     *  on which streets houses should be sold and which streets
-                     *  it should be discussed between C# coders how to propose for players variants
+                     * be discussed betweon which streets houses should be sold and which streets
+                     * it should en C# coders how to propose for players variants
                      *
                      */
 
@@ -159,17 +230,8 @@ public class Main {
                 }
             }
 
-            if (id1==id2){
-
-                repeat++;
+            if (repeat > 0){
                 turn--;
-
-                if (repeat == 3){
-                    players[turn].beImprisoned();
-                    repeat = 0;
-                    turn++;
-                }
-
             }
 
             loop = map.looping(turn, loop, players);

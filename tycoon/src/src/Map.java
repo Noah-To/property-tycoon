@@ -13,10 +13,8 @@ import src.Utility;
 import src.Tax;
 import src.SpecialStreet;
 
-
 import src.Street;
 import src.Player;
-
 
 import java.io.StringReader;
 //Board with all of the info
