@@ -3,13 +3,13 @@ import src.Bank;
 
 //class player
 public class Player {
-    int money = 1500;
-    int position = 1;
-    int imprisoned = 0;
-    int move_order;
-    String name;
-    Boolean alive = true;
-    int loop = 0;
+    int money = 1500;                   //amount of money player has, initially its 1500
+    int position = 1;                   //current position of the player
+    int imprisoned = 0;                 //is player imprisoned or not, and if, for how may turns
+    int move_order;                     //order in which player will take turn
+    String name;                        //how players decide to show up on the board
+    Boolean alive = true;               //maintaining of possibility player to play
+    int loop = 0;                       //loops count
 
     public Player(int move_order, String name){
         this.move_order = move_order;
@@ -55,7 +55,11 @@ public class Player {
 
     //Going to jail (Via card or field 31)
     public void beImprisoned(){
-        this.imprisoned = 3;
+        if (this.imprisoned < 0){
+            this.imprisoned++;
+        } else {
+            this.imprisoned = 3;
+        }
         this.position = 11;
     }
 

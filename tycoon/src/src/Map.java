@@ -82,7 +82,7 @@ public class Map {
     SpecialStreet Pot_luck2 = new SpecialStreet(18);
     SpecialStreet Pot_luck3 = new SpecialStreet(34);
 
-    //Array for position specification and futher usage
+    //Array for position specification and further usage
     Street[] map = {Go, The_Old_Creek, Pot_luck1, Gangstas_Paradise, Income_tax, Brighton_Station, The_Angels_Delight,
                     Opportunuty_knoks1, Potter_Avenue, Granger_Drive, Prison, Skywalker_Drive, Tesla_Power_Co, Wookie_Hole,
                     Rey_Lane, Hove_Station, Bishop_Drive, Pot_luck2, Dunham_Street, Broyles_Lane, Free_Parking,
@@ -90,19 +90,29 @@ public class Map {
                     Picard_Avenue, Edison_Water, Crusher_Creek, Sirat_Mews, Ghengis_Crescent, Pot_luck3, Ibis_Close,
                     Portslade_Station, Opportunuty_knoks3, James_Webb_Way, Super_tax, Turning_Heights};
 
-    //Method that returns object (Strret) when its needed
+    //Method that returns object (Street) when its needed
     public Street giveStreet(int position){
         return map[position];
     }
 
+    //this method levels up streets when player buys another street of the same color he/she already holds
+    //taking as an input parameter street player has bought we can get all the info we need
     public void levelling(Street street){
+        //taking color from the street
         String color = street.getColor();
+
+        //integer value to show how many times we need to increase level of the street taken as input parameter
+        //to satisfy levels of streets with same color
         int levels = 0;
 
         switch (color){
 
+            //compare color
             case "brown":
+                //compare owner of the input street and other street with same color
+                //make sure we are taking 2 different streets
                 if (street.getOwner() == map[1].getOwner() && street != map[1]){
+                    //if streets are different we increment value of the times needed to increase level of the current street
                     levels++;
                     map[1].incLevel();
                 } else if (street.getOwner() == map[3].getOwner() && street != map[3]) {
@@ -111,7 +121,8 @@ public class Map {
                 }
                 break;
 
-            case "blue":
+            //same applies further
+                case "blue":
                 if (street.getOwner() == map[6].getOwner() && street != map[6]){
                     levels++;
                     map[6].incLevel();
@@ -226,11 +237,14 @@ public class Map {
                 break;
         }
 
+        //here, we increase level of the current street as many times, as was counted other streets with same color and owner
         for (int i=0; i <levels; i++){
             street.incLevel();
         }
     }
 
+    //method is needed to maintain loop of the game flow, as turn order represented through array of players
+    //if value becoming 4, it drops down to 0, as array counts [0, 1, 2, 3]
     public int nextTurn(int nowTurn){
         int turn = nowTurn;
         turn++;
@@ -240,17 +254,24 @@ public class Map {
         return turn;
     }
 
+    //method needed to check is auction is possible, and it is possible if all players has completed at least 1 loop
+    //input parameters: "turn" which turn is it, "loop" to identify is the loop already completed, array of "players"
     public boolean looping(int turn, boolean loop1, Player[] players){
         int i;
         boolean loop = loop1;
 
+        //if the 3rd player did not complete loop - no use of every time do the for loop
+        //if we know, that the loop was completed, it has no sense, to check completeness of it again
         if (turn == 3 && !loop){
+            //checking is the value of loops of particular player > 0 and if not we do net enter the for loop
             if (players[turn].loop != 0){
+                //now we check other players
                 for (i=0; i < 3; i++){
                     if (players[i].loop == 0){
                         break;
                     }
                 }
+                //if all 3 others completed loop, we return "true"
                 if (i == 3){
                     loop = true;
                 }
